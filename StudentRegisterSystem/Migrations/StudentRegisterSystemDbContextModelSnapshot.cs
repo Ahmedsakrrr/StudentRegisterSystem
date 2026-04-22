@@ -41,7 +41,12 @@ namespace StudentRegisterSystem.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Courses");
                 });
@@ -163,6 +168,17 @@ namespace StudentRegisterSystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("StudentRegisterSystem.Models.Course", b =>
+                {
+                    b.HasOne("StudentRegisterSystem.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("StudentRegisterSystem.Models.DoctorStudentAssignment", b =>

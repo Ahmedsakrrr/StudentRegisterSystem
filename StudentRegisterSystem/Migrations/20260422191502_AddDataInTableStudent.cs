@@ -17,7 +17,6 @@ namespace StudentRegisterSystem.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("delete from Students");
-
         }
     }
 }

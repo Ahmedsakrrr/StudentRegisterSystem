@@ -12,8 +12,8 @@ using StudentRegisterSystem.Data;
 namespace StudentRegisterSystem.Migrations
 {
     [DbContext(typeof(StudentRegisterSystemDbContext))]
-    [Migration("20260422162355_TheFirstMigration")]
-    partial class TheFirstMigration
+    [Migration("20260422191546_AddDataInTableDoctorStudentAssignment")]
+    partial class AddDataInTableDoctorStudentAssignment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,12 @@ namespace StudentRegisterSystem.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Courses");
                 });
@@ -166,6 +171,17 @@ namespace StudentRegisterSystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("StudentRegisterSystem.Models.Course", b =>
+                {
+                    b.HasOne("StudentRegisterSystem.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("StudentRegisterSystem.Models.DoctorStudentAssignment", b =>
