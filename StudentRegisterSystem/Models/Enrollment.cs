@@ -1,6 +1,5 @@
 ﻿namespace StudentRegisterSystem.Models
 {
-    //enrollments(id, student_id, course_id, enrollment_date)
     [PrimaryKey(nameof(StudentId), nameof(CourseId))]
     public class Enrollment
     {

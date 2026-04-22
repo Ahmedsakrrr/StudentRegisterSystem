@@ -2,7 +2,6 @@
 
 namespace StudentRegisterSystem.Models
 {
-    //doctors(id, first_name, last_name, specialty, email, phone_number, hire_date)
     public class Doctor
     {
         public int Id { get; set; }
