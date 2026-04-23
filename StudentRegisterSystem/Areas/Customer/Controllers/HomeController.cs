@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
-using StudentRegisterSystem.Data;
-using StudentRegisterSystem.Models;
-using System.Diagnostics;
+
 
 namespace StudentRegisterSystem.Areas.Customer.Controllers
 {
@@ -26,7 +23,7 @@ namespace StudentRegisterSystem.Areas.Customer.Controllers
         {
             var student = _DbContext.Students
                 .FirstOrDefault(s => s.StudentCode == studentCode);
-            Console.WriteLine(studentCode);
+             
 
             if (student != null)
             {
