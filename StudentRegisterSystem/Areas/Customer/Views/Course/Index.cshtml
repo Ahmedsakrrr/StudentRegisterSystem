@@ -1,1 +1,114 @@
 ﻿
+@{
+    ViewData["Title"] = "Courses";
+}
+@model IEnumerable<Course>
+
+<style>
+    body {
+        padding-top: 70px;
+        background: url('/assets/img/portfolio/fullsize/5.jpg') no-repeat center center;
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* Overlay عشان الصورة تبان أحلى */
+    .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        min-height: 100vh;
+        padding-top: 40px;
+    }
+
+    /* Card شكل شيك */
+    .card-custom {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table thead {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .btn {
+        border-radius: 8px;
+    }
+
+    .btn-warning {
+        background-color: #f0ad4e;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #d9534f;
+        border: none;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<div class="overlay">
+    <div class="container">
+        <div class="card-custom">
+            <h2 class="text-center mb-4 text-dark">📚 Courses List</h2>
+
+            <table class="table table-hover text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Doctor</th>
+                        <th>Hours</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CourseName</td>
+                            <td>@item.CourseCode</td>
+
+                            <td>
+                                @(item.Doctor != null
+                                    ? item.Doctor.FirstName + " " + item.Doctor.LastName
+                                    : "No Doctor")
+                            </td>
+
+                            <td>@item.Credits</td>
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark btn-sm">
+                                     Add
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">
+                                    ✏️ Edit
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                                    🗑 Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

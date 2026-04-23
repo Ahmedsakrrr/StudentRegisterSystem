@@ -14,9 +14,26 @@ namespace StudentRegisterSystem.Areas.Customer.Controllers
            
             return View();
         }
+        [HttpGet]
+        public IActionResult Login()
+        {
+           
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Login(string studentCode)
         {
+            var student = _DbContext.Students
+                .FirstOrDefault(s => s.StudentCode == studentCode);
+            Console.WriteLine(studentCode);
 
+            if (student != null)
+            {
+                return RedirectToAction("Index","Course");
+            }
+
+            ViewBag.Error = "Invalid Code";
             return View();
         }
 
